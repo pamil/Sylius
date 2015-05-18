@@ -48,3 +48,7 @@ facebook_login:
 
 google_login:
     path: /login/check-google
+
+_test:
+    path: /test
+    defaults: { _controller: SyliusThemeBundle:Example:example }
