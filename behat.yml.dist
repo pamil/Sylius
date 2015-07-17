@@ -425,7 +425,7 @@ default:
 javascript:
     extensions:
         Behat\MinkExtension:
-            base_url: # enter your base url here
+            base_url: # __base_url__ # don't change previous comment (Travis integration)
             sessions:
                 javascript:
                     selenium2: ~
