@@ -6,6 +6,8 @@ bin/phpspec run -f dot || EXIT_STATUS=$?
 
 #bin/phpunit -c app/phpunit.xml.dist || EXIT_STATUS=$?
 
+bin/behat -p javascript -f progress || EXIT_STATUS=$?
+
 bin/behat --suite=account -fprogress || EXIT_STATUS=$?
 bin/behat --suite=addressing -fprogress || EXIT_STATUS=$?
 bin/behat --suite=cart -fprogress || EXIT_STATUS=$?
