@@ -734,3 +734,9 @@ sylius_user:
         customer:
             model: Sylius\Component\Core\Model\Customer
             controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
+
+sylius_addressing:
+    classes:
+        country:
+            model: Sylius\Component\Core\Model\Country
+            controller: Sylius\Bundle\CoreBundle\Controller\CountryController

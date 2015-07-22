@@ -10,6 +10,7 @@
             <th>{{ sylius_resource_sort('id', 'sylius.country.id'|trans) }}</th>
             <th>{{ 'sylius.country.name'|trans }}</th>
             <th>{{ sylius_resource_sort('isoName', 'sylius.country.iso_name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('enabled', 'sylius.country.enabled'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -20,9 +21,20 @@
             <td><a href="{{ path('sylius_backend_country_show', {'id': country.id}) }}">{{ country.name }}</a></td>
             <td><span class="label label-primary">{{ country.isoName }}</span></td>
             <td>
+                {% if country.enabled %}
+                    <span class="label label-success">{{ 'sylius.yes'|trans|upper }}</span>
+                {% else %}
+                    <span class="label label-danger">{{ 'sylius.no'|trans|upper }}</span>
+                {% endif %}
+            </td>
+            <td>
                 <div class="pull-right">
-                {{ buttons.edit(path('sylius_backend_country_update', {'id': country.id})) }}
-                {{ buttons.delete(path('sylius_backend_country_delete', {'id': country.id})) }}
+                    {{ buttons.edit(path('sylius_backend_country_update', {'id': country.id})) }}
+                    {% if country.enabled %}
+                        {{ buttons.patch(path('sylius_backend_country_disable', {'id': country.id}), 'sylius.disable'|trans, 'remove', 'danger') }}
+                    {% else %}
+                        {{ buttons.patch(path('sylius_backend_country_enable', {'id': country.id}), 'sylius.enable'|trans, 'ok', 'success') }}
+                    {% endif %}
                 </div>
             </td>
         </tr>
@@ -34,3 +46,4 @@
 {% endif %}
 
 {% endmacro %}
+

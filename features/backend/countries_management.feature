@@ -4,6 +4,11 @@ Feature: Countries management - enabling and disabling countries
   As a store owner
   I want to set if given country is enabled or not
 
+  Background:
+      Given there is default currency configured
+      And there is default channel configured
+      And I am logged in as administrator
+
   Scenario: Enabling country
      Given there is a disabled country "France"
        And I am on the country index page
