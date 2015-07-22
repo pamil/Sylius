@@ -9,12 +9,13 @@ Feature: User account addresses page
           And there is default channel configured
           And I am logged in user
           And the following countries exist:
-            | name          |
-            | Germany       |
-            | Austria       |
-            | Poland        |
-            | Finland       |
-            | United States |
+            | name          | enabled |
+            | Germany       | yes     |
+            | Austria       | yes     |
+            | Poland        | yes     |
+            | Finland       | yes     |
+            | United States | yes     |
+            | Ukraine       | no      |
           And the following addresses exist:
             | user               | address                                               |
             | sylius@example.com | Jan Kowalski, Heine-Straße 12, 99734, Berlin, Germany |
@@ -110,3 +111,15 @@ Feature: User account addresses page
        Then I should not see "No default shipping address"
         And I should see a "#defaultShippingAddress" element near "POLAND"
         And I should see "Your shipping address has been changed."
+
+    Scenario: Showing only enabled countries
+       When I am on my account address creation page
+       Then I should not see "Ukraine" in the countries list
+
+    Scenario: Trying to create a new address with country that is no longer available
+      Given I am on my account address creation page
+        And I fill in address form with correct data
+        And I set "Germany" as my country
+       When store owner set country "Germany" as disabled
+        And I press "Save changes"
+       Then I should see "Given country is no longer available"
