@@ -744,7 +744,7 @@ sylius_user:
             model: Sylius\Component\Core\Model\Customer
             controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
 
-sylius_seo:
+sylius_metadata:
     classes:
         metadata:
             form: Sylius\Bundle\CoreBundle\Form\Type\RootMetadataFormType
