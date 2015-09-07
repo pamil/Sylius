@@ -9,7 +9,7 @@
     <div id="dynamic-form-{{ name }}">
         {# Render nested form (if possible) #}
         {% if attribute(form.children, name) is defined %}
-            {{ form_row(attribute(form.children, name)) }}
+            {{ form_widget(attribute(form.children, name)) }}
         {% endif %}
     </div>
 {% endblock %}
