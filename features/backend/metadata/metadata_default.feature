@@ -10,6 +10,6 @@ Feature: Metadata management
 
   Scenario: Accessing default metadata customization page
     Given I am on the metadata index page
-     When I click "Manage default metadata"
+     When I click "Customize default metadata"
      Then I should be on the metadata customization page
       And I should be customizing default metadata
