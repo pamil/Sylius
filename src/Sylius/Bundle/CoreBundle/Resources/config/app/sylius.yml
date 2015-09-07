@@ -747,4 +747,6 @@ sylius_user:
 sylius_metadata:
     classes:
         metadata:
+            controller: Sylius\Bundle\WebBundle\Controller\Backend\MetadataController
+            repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\MetadataRepository
             form: Sylius\Bundle\CoreBundle\Form\Type\RootMetadataFormType
