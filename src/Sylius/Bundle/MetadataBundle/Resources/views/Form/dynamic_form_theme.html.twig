@@ -1,8 +1,8 @@
 {% block sylius_dynamic_form_row %}
-    {{ form_row(form._form, { 'attr': { 'data-dynamic-form': true } }) }}
+    {{ form_row(form._form, { 'attr': { 'data-dynamic-form': true, 'data-container': "#dynamic-form-" ~ name } }) }}
 
     {% for prototypeName, prototype in form.vars.prototypes %}
-        <div id="{{ form._form.vars.id }}_{{ prototypeName }}" data-container="#dynamic-form-{{ name }}" data-prototype="{{ form_widget(prototype)|e }}">
+        <div id="{{ form._form.vars.id }}_{{ prototypeName }}" data-prototype="{{ form_widget(prototype)|e }}">
         </div>
     {% endfor %}
 
