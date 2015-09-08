@@ -60,8 +60,8 @@ class MetadataProviderSpec extends ObjectBehavior
             'MetadataSubject',
         ]);
 
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled()->willReturn($rootMetadata);
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled()->willReturn(null);
+        $rootMetadataRepository->find('MetadataSubject-42')->shouldBeCalled()->willReturn($rootMetadata);
+        $rootMetadataRepository->find('MetadataSubject')->shouldBeCalled()->willReturn(null);
 
         $rootMetadata->getMetadata()->shouldBeCalled()->willReturn($metadata);
 
@@ -85,8 +85,8 @@ class MetadataProviderSpec extends ObjectBehavior
             'MetadataSubject',
         ]);
 
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled()->willReturn(null);
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled()->willReturn($rootMetadata);
+        $rootMetadataRepository->find('MetadataSubject-42')->shouldBeCalled()->willReturn(null);
+        $rootMetadataRepository->find('MetadataSubject')->shouldBeCalled()->willReturn($rootMetadata);
 
         $rootMetadata->getMetadata()->shouldBeCalled()->willReturn($metadata);
 
@@ -112,8 +112,8 @@ class MetadataProviderSpec extends ObjectBehavior
             'MetadataSubject',
         ]);
 
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled()->willReturn($rootChildMetadata);
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled()->willReturn($rootParentMetadata);
+        $rootMetadataRepository->find('MetadataSubject-42')->shouldBeCalled()->willReturn($rootChildMetadata);
+        $rootMetadataRepository->find('MetadataSubject')->shouldBeCalled()->willReturn($rootParentMetadata);
 
         $rootChildMetadata->getMetadata()->shouldBeCalled()->willReturn($childMetadata);
         $rootParentMetadata->getMetadata()->shouldBeCalled()->willReturn($parentMetadata);
@@ -135,8 +135,8 @@ class MetadataProviderSpec extends ObjectBehavior
             'MetadataSubject',
         ]);
 
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled()->willReturn(null);
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled()->willReturn(null);
+        $rootMetadataRepository->find('MetadataSubject-42')->shouldBeCalled()->willReturn(null);
+        $rootMetadataRepository->find('MetadataSubject')->shouldBeCalled()->willReturn(null);
 
         $metadataCompiler->compile(Argument::cetera())->shouldNotBeCalled();
 
@@ -154,8 +154,8 @@ class MetadataProviderSpec extends ObjectBehavior
         $metadataSubject->getMetadataIdentifier()->shouldBeCalled()->willReturn('MetadataSubject-42');
         $metadataSubject->getMetadataClassIdentifier()->shouldBeCalled()->willReturn('MetadataSubject');
 
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject-42'])->shouldBeCalled();
-        $rootMetadataRepository->findOneBy(['key' => 'MetadataSubject'])->shouldBeCalled();
+        $rootMetadataRepository->find('MetadataSubject-42')->shouldBeCalled();
+        $rootMetadataRepository->find('MetadataSubject')->shouldBeCalled();
 
         $metadataCompiler->compile(Argument::cetera());
 
