@@ -5,7 +5,8 @@ Feature: User registration
     I need to be able to create an account in the store
 
     Background:
-        Given there are following users:
+        Given store has default configuration
+          And there are following users:
             | email       | password |
             | bar@bar.com | foo1     |
           And the following customers exist:
@@ -17,8 +18,6 @@ Feature: User registration
           And the following orders exist:
             | customer                | address                                        |
             | customer@email.com      | Jan Kowalski, Wawel 5 , 31-001, Kraków, Poland |
-          And there is default currency configured
-          And there is default channel configured
 
     Scenario: Successfully creating account in store
         Given I am on the store homepage
@@ -46,12 +45,12 @@ Feature: User registration
          Then I should see "Welcome"
           And I should see "Logout"
 
-    Scenario: Viewing orders places as guest after registration
+    Scenario: Viewing orders placed as a guest after registration
         Given I registered with email "customer@email.com" and password "sylius"
          When I display my orders history
          Then I should see 1 order in the list
 
-    Scenario: Viewing orders places as guest after registration
+    Scenario: Viewing addresses used as a guest after registration
         Given I registered with email "customer@email.com" and password "sylius"
          When I display my address book
          Then I should see 1 address in the list

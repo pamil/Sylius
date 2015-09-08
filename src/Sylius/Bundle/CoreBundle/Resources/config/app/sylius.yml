@@ -216,9 +216,7 @@ sylius_search:
                 id: ~
                 name: ~
                 description: ~
-
-    custom_accessors:
-        - Sylius\Component\Product\Accessor\ProductAccessor
+    custom_accessor: Sylius\Component\Product\Accessor\ProductAccessor
     filters:
         pre_search_filter:
             enabled: true
@@ -726,6 +724,9 @@ sylius_rbac:
         it: [security_auditor, developer]
 
 sylius_user:
+    templates:
+        user: SyliusWebBundle:Frontend/User
+        customer: SyliusWebBundle:Frontend/Customer
     classes:
         user:
             model: Sylius\Component\Core\Model\User

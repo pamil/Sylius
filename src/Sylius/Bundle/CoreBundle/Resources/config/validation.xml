@@ -25,16 +25,6 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Core\Model\ProductTranslation">
-        <property name="shortDescription">
-            <constraint name="Length">
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.product_translation.short_description.max</option>
-                <option name="groups">sylius</option>                
-            </constraint>
-        </property>
-    </class>
-
     <class name="Sylius\Component\Core\Model\ProductVariant">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">sku</option>
@@ -85,6 +75,12 @@
     <class name="Sylius\Component\Cart\Model\CartItem">
         <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
             <option name="stockablePath">variant</option>
+            <option name="groups">sylius</option>
+        </constraint>
+    </class>
+
+    <class name="Sylius\Component\Core\Model\Channel">
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntity">
             <option name="groups">sylius</option>
         </constraint>
     </class>
