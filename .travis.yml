@@ -14,40 +14,35 @@ cache:
 
 sudo: false
 
+services:
+    - memcached
+    - mongodb
+
 matrix:
     fast_finish: true
 
     include:
         - php: 5.6
-          env: TEST_SUITE=1
-          services: [mongodb]
-        - php: 5.6
-          env: TEST_SUITE=2
-
+          env: TEST_SUITE=no-javascript
         - php: 5.6
           env: TEST_SUITE=javascript
           sudo: required
 
         - php: 7.0
-          env: TEST_SUITE=1
-        - php: 7.0
-          env: TEST_SUITE=2
-
+          env: TEST_SUITE=no-javascript
         - php: 5.5
-          env: TEST_SUITE=1
-          services: [mongodb]
-        - php: 5.5
-          env: TEST_SUITE=2
+          env: TEST_SUITE=no-javascript
 
 before_install:
     - mkdir -p $SYLIUS_CACHE_DIR
 
-    - echo '' > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
+    - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo "" > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
     - composer self-update
 
-    - if [ $TRAVIS_PHP_VERSION != "7.0" ] && [ $TEST_SUITE = 1 ]; then travis/prepare/prepare-mongodb; fi
+    - if [ $TRAVIS_PHP_VERSION != "7.0" ]; then travis/prepare/prepare-mongodb; fi
 
     - composer install --prefer-source --no-interaction
 
