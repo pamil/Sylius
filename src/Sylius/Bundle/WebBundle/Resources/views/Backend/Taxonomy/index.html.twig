@@ -6,16 +6,16 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li>{{ 'sylius.ui.taxonomies'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="actions-menu">
-        {{ buttons.create(path('sylius_backend_taxonomy_create'), 'sylius.taxonomy.create'|trans) }}
-        {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.product.manage'|trans) }}
+        {{ buttons.create(path('sylius_backend_taxonomy_create'), 'sylius.ui.create_taxonomy'|trans) }}
+        {{ buttons.manage(path('sylius_backend_product_index'), 'sylius.ui.manage_products'|trans) }}
     </div>
     <h1><i class="glyphicon glyphicon-folder-close"></i> {{ 'sylius.taxonomy.index_header'|trans|raw }}</h1>
 </div>

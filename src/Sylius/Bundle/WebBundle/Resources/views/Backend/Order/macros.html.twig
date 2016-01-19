@@ -11,14 +11,14 @@
     <thead>
         <tr>
             <th></th>
-            <th>{{ sylius_resource_sort('createdAt', 'sylius.order.created_at'|trans, null, {'route_params' : router_paramters}) }}</th>
-            <th>{{ sylius_resource_sort('channel', 'sylius.order.channel'|trans, null, {'route_params' : router_paramters}) }}</th>
-            <th>{{ sylius_resource_sort('number', 'sylius.order.number'|trans, null, {'route_params' : router_paramters}) }}</th>
-            <th>{{ sylius_resource_sort('paymentState', 'sylius.order.payment_state'|trans, null, {'route_params' : router_paramters}) }}</th>
-            <th>{{ sylius_resource_sort('shippingState', 'sylius.order.shipment_state'|trans, null, {'route_params' : router_paramters}) }}</th>
-            <th>{{ sylius_resource_sort('customer.lastName', 'sylius.order.customer'|trans, null, {'route_params' : router_paramters}) }}</th>
-            <th>{{ sylius_resource_sort('total', 'sylius.order.total'|trans, null, {'route_params' : router_paramters}) }}</th>
-            <th>{{ sylius_resource_sort('details', 'sylius.order.additional_information'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('createdAt', 'sylius.ui.creation_time'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('channel', 'sylius.ui.channel'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('number', 'sylius.ui.number'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('paymentState', 'sylius.ui.payment_state'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('shippingState', 'sylius.ui.shipment_state'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('customer.lastName', 'sylius.ui.customer'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('total', 'sylius.ui.total'|trans, null, {'route_params' : router_paramters}) }}</th>
+            <th>{{ sylius_resource_sort('details', 'sylius.ui.additional_information'|trans, null, {'route_params' : router_paramters}) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -81,10 +81,10 @@
 <table id="orders" class="table">
     <thead>
         <tr>
-            <th>{{ 'sylius.order.number'|trans }}</th>
-            <th>{{ 'sylius.order.payment_state'|trans }}</th>
-            <th>{{ 'sylius.order.customer'|trans }}</th>
-            <th>{{ 'sylius.order.total'|trans }}</th>
+            <th>{{ 'sylius.ui.number'|trans }}</th>
+            <th>{{ 'sylius.ui.payment_state'|trans }}</th>
+            <th>{{ 'sylius.ui.customer'|trans }}</th>
+            <th>{{ 'sylius.ui.total'|trans }}</th>
         </tr>
     </thead>
     <tbody>

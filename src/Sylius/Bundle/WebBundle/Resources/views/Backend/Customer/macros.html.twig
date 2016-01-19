@@ -8,12 +8,12 @@
 <table id="customers" class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('id', 'sylius.customer.id'|trans) }}</th>
-            <th>{{ sylius_resource_sort('firstName', 'sylius.customer.first_name'|trans) }}</th>
-            <th>{{ sylius_resource_sort('lastName', 'sylius.customer.last_name'|trans) }}</th>
-            <th>{{ sylius_resource_sort('email', 'sylius.customer.email'|trans) }}</th>
-            <th>{{ sylius_resource_sort('user.createdAt', 'sylius.user.registration_date'|trans) }}</th>
-            <th>{{ sylius_resource_sort('user.enabled', 'sylius.user.enabled'|trans) }}</th>
+            <th>{{ sylius_resource_sort('id', 'sylius.ui.id'|trans) }}</th>
+            <th>{{ sylius_resource_sort('firstName', 'sylius.ui.first_name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('lastName', 'sylius.ui.last_name'|trans) }}</th>
+            <th>{{ sylius_resource_sort('email', 'sylius.ui.email'|trans) }}</th>
+            <th>{{ sylius_resource_sort('user.createdAt', 'sylius.ui.registration_date'|trans) }}</th>
+            <th>{{ sylius_resource_sort('user.enabled', 'sylius.ui.confirmed'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
@@ -71,8 +71,8 @@
 <table id="customers" class="table">
     <thead>
         <tr>
-            <th>{{ sylius_resource_sort('email', 'sylius.customer.email'|trans) }}</th>
-            <th>{{ sylius_resource_sort('user.enabled', 'sylius.user.enabled'|trans) }}</th>
+            <th>{{ sylius_resource_sort('email', 'sylius.ui.email'|trans) }}</th>
+            <th>{{ sylius_resource_sort('user.enabled', 'sylius.ui.confirmed'|trans) }}</th>
             <th></th>
         </tr>
     </thead>
