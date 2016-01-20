@@ -1,9 +1,38 @@
-{% extends 'knp_menu.html.twig' %}
 
-{% block label %}
-    {% if item.labelAttribute('icon') %}<i class="{{ item.labelAttribute('icon') }}"></i>{% endif %}
-    {% if not item.labelAttribute('iconOnly') %}
-        <span>{% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|trans|raw }}{% else %}{{ item.label|trans }}{% endif %}</span>
+{% block block %}
+
+    {% if block is defined and block.children %}
+        <div class="carousel">
+            <div id="gallery-{{ block.name }}" style="display:none">
+                {% for item in block.children %}
+                    {{ sonata_block_render(item) }}
+                {% endfor %}
+            </div>
+            <div id="blueimp-gallery-{{ block.name }}" class="blueimp-gallery blueimp-gallery-carousel">
+                <div class="slides"></div>
+                <h3 class="title"></h3>
+                <a class="prev">‹</a>
+                <a class="next">›</a>
+                <a class="play-pause"></a>
+                <ol class="indicator"></ol>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", init, false);
+
+            function init() {
+                blueimp.Gallery(
+                    document.getElementById('gallery-{{ block.name }}').getElementsByTagName('a'),
+                    {
+                        container: '#blueimp-gallery-{{ block.name }}',
+                        carousel: true,
+                        stretchImages: "contain"
+                    }
+                );
+            };
+        </script>
     {% endif %}
-    {% if item.labelAttribute('data-image') %}<img src="{{ item.labelAttribute('data-image')|imagine_filter('sylius_small') }}" alt="{{ item.name }}" class="menu-thumbnail"/>{% endif %}
+
 {% endblock %}
+
