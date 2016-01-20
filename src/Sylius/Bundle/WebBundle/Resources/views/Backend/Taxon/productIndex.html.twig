@@ -9,8 +9,8 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.breadcrumb.taxonomy.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_taxonomy_index') }}">{{ 'sylius.ui.taxonomies'|trans }}</a></li>
     <li><a href="{{ path('sylius_backend_taxonomy_show', {'id': taxonomy.id})}}">{{ taxonomy.name }}</a></li>
     <li>{{ taxon.name }}</li>
 </ol>
