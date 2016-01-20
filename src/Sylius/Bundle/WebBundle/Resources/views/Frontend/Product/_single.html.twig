@@ -13,13 +13,13 @@
             <div class="pull-left">
             {% if not sylius_inventory_is_available(product.masterVariant) %}
                 <br />
-                <span class="label label-important">{{ 'sylius.out_of_stock'|trans }}</span>
+                <span class="label label-important">{{ 'sylius.ui.out_of_stock'|trans }}</span>
             {% else %}
                 <form action="{{ path('sylius_cart_item_add', {'id': product.id}) }}" method="post" class="clearfix">
                     {% set form = sylius_cart_form({'product': product}) %}
                     {{ form_widget(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
                     {{ form_widget(form._token) }}
-                    <button type="submit" class="btn btn-success"><i class="icon-shopping-cart icon-white"></i> {{ 'sylius.add_to_cart'|trans }}</button>
+                    <button type="submit" class="btn btn-success"><i class="icon-shopping-cart icon-white"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
                 </form>
             {% endif %}
             </div>

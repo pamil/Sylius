@@ -7,8 +7,8 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li><a href="{{ path('sylius_backend_product_index') }}">{{ 'sylius.ui.products'|trans }}</a></li>
     <li>{{ product.name }}</li>
 </ol>
 {% endblock %}
@@ -27,19 +27,19 @@
     {{ buttons.delete(path('sylius_backend_product_delete', {'id': product.id}), null, false, true) }}
     <a href="{{ path(product) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-shopping-cart"></i>
-        {{ 'sylius.product.show_in_store'|trans }}
+        {{ 'sylius.ui.show_in_store'|trans }}
     </a>
     {% else %}
-        {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.restore'|trans, null, 'btn btn-primary') }}
+        {{ buttons.patch(path('sylius_backend_product_delete_restore', {'id': product.id}), 'sylius.ui.restore'|trans, null, 'btn btn-primary') }}
     {% endif %}
     <a href="{{ path('sylius_backend_product_history', {'id': product.id}) }}" class="btn btn-info">
        <i class="glyphicon glyphicon-calendar"></i>
-        {{ 'sylius.history.header'|trans }}
+        {{ 'sylius.ui.history'|trans }}
     </a>
     </div>
     <h1>
         <i class="glyphicon glyphicon-info-sign"></i> {{ 'sylius.product.show_header'|trans({'%product%': product.name})|raw }}
-        {% if product.deleted %}<span class="label label-danger">{{ 'sylius.deleted'|trans }}</span>{% endif %}
+        {% if product.deleted %}<span class="label label-danger">{{ 'sylius.ui.deleted'|trans }}</span>{% endif %}
     </h1>
 </div>
 
@@ -62,34 +62,34 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th colspan="2">{{ 'sylius.order.general_info'|trans }}</th>
+                    <th colspan="2">{{ 'sylius.ui.general_info'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>{{ 'sylius.shipment.id'|trans }}</strong></td>
+                    <td><strong>{{ 'sylius.ui.id'|trans }}</strong></td>
                     <td>{{ product.id }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.sku'|trans }}</td>
+                    <td>{{ 'sylius.ui.sku'|trans }}</td>
                     <td>{{ product.sku }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.name'|trans }}</td>
+                    <td>{{ 'sylius.ui.name'|trans }}</td>
                     <td>{{ product.name }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.available_on'|trans }}</td>
+                    <td>{{ 'sylius.ui.available_on'|trans }}</td>
                     <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableOn|date }}</span></td>
                 </tr>
                 {% if product.availableUntil %}
                 <tr>
-                    <td>{{ 'sylius.product.available_until'|trans }}</td>
+                    <td>{{ 'sylius.ui.available_until'|trans }}</td>
                     <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableUntil|date }}</span></td>
                 </tr>
                 {% endif %}
                 <tr>
-                    <td>{{ 'sylius.product.options'|trans }}</td>
+                    <td>{{ 'sylius.ui.options'|trans }}</td>
                     <td>
                         {% if product.options|length > 0 %}
                         <ul>
@@ -105,7 +105,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.categorization'|trans }}</td>
+                    <td>{{ 'sylius.ui.categorization'|trans }}</td>
                     <td>
                         {% if product.taxons|length > 0 %}
                         <ul>
@@ -121,7 +121,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.main_taxon'|trans }}</td>
+                    <td>{{ 'sylius.ui.main_taxon'|trans }}</td>
                     <td>
                         {%  if product.mainTaxon is not null %}
                             {{ product.mainTaxon }}
@@ -131,22 +131,22 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.tax_category'|trans }}</td>
-                    <td>{{ product.taxCategory|default('sylius.product.no_tax_category'|trans) }}</td>
+                    <td>{{ 'sylius.ui.tax_category'|trans }}</td>
+                    <td>{{ product.taxCategory|default('sylius.ui.no_tax_category'|trans) }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.shipping_category'|trans }}</td>
-                    <td>{{ product.shippingCategory|default('sylius.product.no_shipping_category'|trans) }}</td>
+                    <td>{{ 'sylius.ui.shipping_category'|trans }}</td>
+                    <td>{{ product.shippingCategory|default('sylius.ui.no_shipping_category'|trans) }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.available_on_demand'|trans }}</td>
+                    <td>{{ 'sylius.ui.available_on_demand'|trans }}</td>
                     <td>
                         {{ misc.state_label(product.masterVariant.availableOnDemand) }}
                     </td>
                 </tr>
                 {% if product.restrictedZone %}
                     <tr>
-                        <td>{{ 'sylius.product.restricted_zone'|trans }}</td>
+                        <td>{{ 'sylius.ui.restricted_zone'|trans }}</td>
                         <td>
                             <a href="{{ path('sylius_backend_zone_show', {'id': product.restrictedZone.id}) }}">{{ product.restrictedZone.name }}</a>
                         </td>
@@ -165,7 +165,7 @@
                     <td>{{ product.masterVariant.price|sylius_price }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.product.original_price'|trans }}</td>
+                    <td>{{ 'sylius.ui.original_price'|trans }}</td>
                     <td>{{ product.masterVariant.originalPrice|sylius_price }}</td>
                 </tr>
                 {% if product.masterVariant.pricingCalculator == 'volume_based' %}
@@ -174,9 +174,9 @@
                     <td>
                         <table class="table table-bordered table-striped table-condensed">
                             <tr>
-                                <th>{{ 'sylius.product.volume_based.price'|trans }}</th>
-                                <th>{{ 'sylius.product.volume_based.qty_min'|trans }}</th>
-                                <th>{{ 'sylius.product.volume_based.qty_max'|trans }}</th>
+                                <th>{{ 'sylius.ui.price'|trans }}</th>
+                                <th>{{ 'sylius.ui.qty_min'|trans }}</th>
+                                <th>{{ 'sylius.ui.qty_max'|trans }}</th>
                             </tr>
                             {% for pricing in product.masterVariant.pricingConfiguration if (pricing.min is not same as(null) and pricing.price is not same as(null)) %}
                                 <tr>
@@ -210,7 +210,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th colspan="2">{{ 'sylius.product.attributes'|trans }}</th>
+                    <th colspan="2">{{ 'sylius.ui.attributes'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -243,10 +243,10 @@
 <div class="well well-sm">
     {{ buttons.create(path('sylius_backend_product_variant_create', {'productId': product.id}), 'sylius.variant.create'|trans) }}
     {% if product.hasOptions %}
-        {{ buttons.patch(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.product.generate_variants'|trans) }}
+        {{ buttons.patch(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.ui.generate_variants'|trans) }}
     {% endif %}
     <div class="pull-right">
-        <strong>{{ 'sylius.product.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
+        <strong>{{ 'sylius.ui.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}
     </div>
 </div>
 {% endif %}

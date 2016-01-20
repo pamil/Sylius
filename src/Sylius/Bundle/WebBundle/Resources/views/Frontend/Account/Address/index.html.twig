@@ -45,12 +45,8 @@
                             {% endif %}
                         </td>
                         <td>
-                            {{ buttons.edit(
-                                path('sylius_account_address_update', {'id': address.id}),
-                                'sylius.account.address.action.edit') }}&nbsp;
-                            {{ buttons.delete(
-                                path('sylius_account_address_delete', {'id': address.id}),
-                                'sylius.account.address.action.delete'|trans) }}
+                            {{ buttons.edit(path('sylius_account_address_update', {'id': address.id})) }}&nbsp;
+                            {{ buttons.delete(path('sylius_account_address_delete', {'id': address.id})) }}
                         </td>
                     </tr>
                 {% endfor %}

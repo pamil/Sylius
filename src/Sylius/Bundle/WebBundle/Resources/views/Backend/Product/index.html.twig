@@ -6,8 +6,8 @@
 
 {% block topbar %}
 <ol class="breadcrumb">
-    <li>{{ 'sylius.breadcrumb.assortment'|trans }}</li>
-    <li>{{ 'sylius.breadcrumb.product.index'|trans }}</a></li>
+    <li>{{ 'sylius.ui.assortment'|trans }}</li>
+    <li>{{ 'sylius.ui.products'|trans }}</a></li>
 </ol>
 {% endblock %}
 
@@ -18,9 +18,9 @@
         {{ buttons.manage(path('sylius_backend_product_option_index'), 'sylius.product_option.manage'|trans) }}
         {{ buttons.manage(path('sylius_backend_product_attribute_index'), 'sylius.product_attribute.manage'|trans) }}
         {% if app.request.query.get('deleted') %}
-            <a href="{{ path('sylius_backend_product_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.hide_deleted'|trans }}</a>
+            <a href="{{ path('sylius_backend_product_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.ui.hide_deleted'|trans }}</a>
         {% else %}
-            <a href="{{ path('sylius_backend_product_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.show_deleted'|trans }}</a>
+            <a href="{{ path('sylius_backend_product_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.ui.show_deleted'|trans }}</a>
         {% endif %}
     </div>
     <h1><i class="glyphicon glyphicon-th-list"></i> {{ 'sylius.product.index_header'|trans|raw }}</h1>
