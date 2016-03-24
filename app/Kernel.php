@@ -121,7 +121,7 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(), // must be added after FrameworkBundle
         ];
 
-        if (in_array($this->environment, array('dev', 'test'))) {
+        if (in_array($this->environment, ['dev', 'test'], true)) {
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
         }
@@ -148,6 +148,7 @@ class Kernel extends HttpKernel
     {
         $rootDir = $this->getRootDir();
 
+        $loader->load($rootDir.'/config/parameters.yml');
         $loader->load($rootDir.'/config/config_'.$this->environment.'.yml');
 
         if (is_file($file = $rootDir.'/config/config_'.$this->environment.'.local.yml')) {

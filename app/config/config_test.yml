@@ -10,7 +10,6 @@ parameters:
 doctrine:
     dbal:
         dbname: %database_name%_test
-        path: %database_path%
         driver_class: Sylius\Bundle\CoreBundle\Test\MySqlDriver
 
 doctrine_cache:
@@ -46,6 +45,10 @@ swiftmailer:
 sylius_money:
     currency: EUR
     locale: en_US
+
+sylius_theme:
+    sources:
+        test: ~
 
 sylius_payment:
     gateways:

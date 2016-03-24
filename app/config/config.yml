@@ -2,8 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: parameters.yml }
-
     - { resource: common/assetic.yml }
     - { resource: common/cmf.yml }
     - { resource: common/doctrine.yml }
