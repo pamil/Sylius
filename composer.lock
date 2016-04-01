@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "28929d5e95ec4655c2aed245b38c9bc1",
-    "content-hash": "6fb8a984c1118fb0ac05a278d3aa6e25",
+    "hash": "c99aad19c436925a228a085cca424ddf",
+    "content-hash": "b63a2eac7804d4d34265755522caabc5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -6911,36 +6911,38 @@
         },
         {
             "name": "symfony-cmf/routing",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/Routing.git",
-                "reference": "8e87981d72c6930a27585dcd3119f3199f6cb2a6"
+                "reference": "b93704ca098334f56e9b317932f21a4362e620db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/8e87981d72c6930a27585dcd3119f3199f6cb2a6",
-                "reference": "8e87981d72c6930a27585dcd3119f3199f6cb2a6",
+                "url": "https://api.github.com/repos/symfony-cmf/Routing/zipball/b93704ca098334f56e9b317932f21a4362e620db",
+                "reference": "b93704ca098334f56e9b317932f21a4362e620db",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
-                "psr/log": "~1.0",
-                "symfony/http-kernel": "~2.2",
-                "symfony/routing": "~2.2"
+                "php": "^5.3.9|^7.0",
+                "psr/log": "1.*",
+                "symfony/http-kernel": "^2.2|3.*",
+                "symfony/routing": "^2.2|3.*"
             },
             "require-dev": {
-                "symfony/config": "~2.2",
-                "symfony/dependency-injection": "~2.0@stable",
-                "symfony/event-dispatcher": "~2.1"
+                "friendsofsymfony/jsrouting-bundle": "^1.1",
+                "symfony-cmf/testing": "^1.3",
+                "symfony/config": "^2.2|3.*",
+                "symfony/dependency-injection": "^2.0.5|3.*",
+                "symfony/event-dispatcher": "^2.1|3.*"
             },
             "suggest": {
-                "symfony/event-dispatcher": "DynamicRouter can optionally trigger an event at the start of matching. Minimal version ~2.1"
+                "symfony/event-dispatcher": "DynamicRouter can optionally trigger an event at the start of matching. Minimal version (~2.1)"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -6964,29 +6966,29 @@
                 "database",
                 "routing"
             ],
-            "time": "2014-10-20 20:55:17"
+            "time": "2016-03-31 09:11:39"
         },
         {
             "name": "symfony-cmf/routing-bundle",
-            "version": "1.4.0-RC1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony-cmf/RoutingBundle.git",
-                "reference": "827703c49b81dd34833aca8b493ab717a38e5afa"
+                "reference": "cd358f852fe5323407fbd67931c0e034f735660b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/827703c49b81dd34833aca8b493ab717a38e5afa",
-                "reference": "827703c49b81dd34833aca8b493ab717a38e5afa",
+                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/cd358f852fe5323407fbd67931c0e034f735660b",
+                "reference": "cd358f852fe5323407fbd67931c0e034f735660b",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3.9|^7.0",
-                "symfony-cmf/routing": "~1.2",
+                "symfony-cmf/routing": "^1.4.0",
                 "symfony/framework-bundle": "~2.3"
             },
             "require-dev": {
-                "doctrine/data-fixtures": "^1.0.0-alpha3",
+                "doctrine/data-fixtures": "^1.0.0",
                 "doctrine/orm": "~2.3",
                 "doctrine/phpcr-odm": "~1.3",
                 "matthiasnoback/symfony-config-test": "^1.3.1",
@@ -6994,7 +6996,7 @@
                 "phpunit/php-code-coverage": "@stable",
                 "sonata-project/doctrine-phpcr-admin-bundle": "^1.1",
                 "symfony-cmf/core-bundle": "~1.1",
-                "symfony-cmf/testing": "~1.3@dev",
+                "symfony-cmf/testing": "~1.3",
                 "symfony/monolog-bundle": "~2.3"
             },
             "suggest": {
@@ -7032,7 +7034,7 @@
                 "database",
                 "routing"
             ],
-            "time": "2016-01-21 16:20:40"
+            "time": "2016-03-31 09:49:58"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -10430,7 +10432,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "symfony-cmf/routing-bundle": 5,
         "lakion/api-test-case": 20
     },
     "prefer-stable": false,
