@@ -7,55 +7,28 @@ imports:
 parameters:
     sylius.order.allow_guest_order: true
 
-framework:
-    test: ~
-    default_locale: "en"
-    session:
-        storage_id: session.storage.mock_file
-
-swiftmailer:
-    disable_delivery: true
-
 doctrine:
     dbal:
         dbname: %database_name%_test
         driver_class: Sylius\Bundle\CoreBundle\Test\MySqlDriver
-
-sylius_money:
-    currency: EUR
-    locale:   en_US
-
-sylius_payment:
-    gateways:
-        cc:     Credit Card
-        test:   Test
-        stripe: Stripe
-        paypal_express_checkout: Paypal Express Checkout
-
-sylius_rbac:
-    authorization_checker: sylius.authorization_checker.toggleable
-
-sylius_channel:
-    fake_channel_support: true
-
-sylius_theme:
-    sources:
-        test: ~
 
 doctrine_cache:
     providers:
         sylius_settings:
             type: array
 
+framework:
+    test: ~
+    default_locale: "en"
+    session:
+        storage_id: session.storage.mock_file
+
 monolog:
     handlers:
         main:
-            type:  stream
-            path:  %kernel.logs_dir%/%kernel.environment%.log
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.log
             level: error
-
-twig:
-    exception_controller: 'Sylius\Bundle\CoreBundle\Controller\VerboseExceptionController::showAction'
 
 payum:
     gateways:
@@ -65,3 +38,29 @@ payum:
                 password: TEST
                 signature: TEST
                 sandbox: true
+
+swiftmailer:
+    disable_delivery: true
+
+sylius_money:
+    currency: EUR
+    locale: en_US
+
+sylius_theme:
+    sources:
+        test: ~
+
+sylius_payment:
+    gateways:
+        cc: Credit Card
+        test: Test
+        stripe: Stripe
+
+sylius_rbac:
+    authorization_checker: sylius.authorization_checker.toggleable
+
+sylius_channel:
+    fake_channel_support: true
+
+twig:
+    exception_controller: 'Sylius\Bundle\CoreBundle\Controller\VerboseExceptionController::showAction'
