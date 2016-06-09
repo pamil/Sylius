@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_fixtures:
+    suites:
+        sample_suite:
+            fixtures:
+                sample_fixture:
+                    priority: 10
+                    options:
+                        administrators:
+                            - Zbigniew Hołdys
+                            - Krzysztof Krawczyk
+                            - Ryszard Rynkowski
