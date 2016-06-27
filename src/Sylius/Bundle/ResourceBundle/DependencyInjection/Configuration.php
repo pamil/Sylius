@@ -196,7 +196,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('drivers')
                     ->info('Enable drivers which are distributed with this bundle')
                     ->validate()
-                    ->ifTrue(function ($value) use ($validDrivers) { 
+                    ->ifTrue(function ($value) use ($validDrivers) {
                         return 0 !== count(array_diff($value, $validDrivers)); 
                     })
                         ->thenInvalid(sprintf('Invalid driver specified in %%s, valid drivers: ["%s"]', implode('", "', $validDrivers)))

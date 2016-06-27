@@ -496,7 +496,7 @@ class Product implements ProductInterface
     /**
      * @return bool
      */
-    public function isSimple() 
+    public function isSimple()
     {
         return 1 === $this->variants->count() && !$this->hasOptions();
     }
