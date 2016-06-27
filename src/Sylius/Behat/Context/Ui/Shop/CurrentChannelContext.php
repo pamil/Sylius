@@ -28,7 +28,7 @@ final class CurrentChannelContext implements Context
     /**
      * @param ChannelContextSetterInterface $channelContextSetter
      */
-    public function __construct(ChannelContextSetterInterface $channelContextSetter) 
+    public function __construct(ChannelContextSetterInterface $channelContextSetter)
     {
         $this->channelContextSetter = $channelContextSetter;
     }

@@ -29,8 +29,7 @@ class DefaultParentListenerSpec extends ObjectBehavior
 {
     function let(
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to'
@@ -46,8 +45,7 @@ class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $event->getSubject()->willReturn(new \stdClass());
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
@@ -66,8 +64,7 @@ class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -92,8 +89,7 @@ class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $subjectDocument = new \stdClass();
         $parentDocument = new \stdClass();
 
@@ -115,8 +111,7 @@ class DefaultParentListenerSpec extends ObjectBehavior
         DocumentManagerInterface $documentManager,
         SessionInterface $session,
         NodeInterface $node
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -151,8 +146,7 @@ class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -181,8 +175,7 @@ class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $subjectDocument = new \stdClass();
 
         $event->getSubject()->willReturn($subjectDocument);

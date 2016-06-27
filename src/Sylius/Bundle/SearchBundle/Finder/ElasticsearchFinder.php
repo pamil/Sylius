@@ -330,7 +330,7 @@ class ElasticsearchFinder extends AbstractFinder
         }
 
         foreach ($facets as &$facet) {
-            $facet = array_filter($facet, function($v){
+            $facet = array_filter($facet, function($v) {
                 return $v["doc_count"] != 0;
             });
         }

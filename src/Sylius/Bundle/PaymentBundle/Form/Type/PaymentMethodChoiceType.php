@@ -102,8 +102,7 @@ class PaymentMethodChoiceType extends AbstractType
      */
     private function createChoiceList()
     {
-        return function (Options $options) 
-        {
+        return function (Options $options) {
             if (isset($options['subject'])) {
                 $resolvedMethods = $this->paymentMethodsResolver->getSupportedMethods($options['subject']);
             } else {

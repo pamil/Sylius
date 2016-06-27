@@ -62,8 +62,7 @@ class StringFilterSpec extends ObjectBehavior
     function it_filters_data_containing_empty_strings(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    )
-    {
+    ) {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->isNull('firstName')->willReturn('EXPR');
@@ -87,8 +86,7 @@ class StringFilterSpec extends ObjectBehavior
     function it_filters_data_containing_a_string(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    )
-    {
+    ) {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR');
