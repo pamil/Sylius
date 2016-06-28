@@ -44,7 +44,7 @@ class SyliusPromotionExtension extends AbstractResourceExtension
             $loader->load($configFile);
         }
 
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->loadResources($container, 'sylius', $config['driver'], $config['resources']);
         $this->overwriteCouponFactory($container);
         $this->overwriteActionFactory($container);
 
@@ -86,5 +86,18 @@ class SyliusPromotionExtension extends AbstractResourceExtension
         $decoratedPromotionActionFactoryDefinition = new Definition($promotionActionFactoryClass, [$baseFactoryDefinition]);
 
         $container->setDefinition('sylius.factory.promotion_action', $decoratedPromotionActionFactoryDefinition);
+    }
+
+    /**
+     * @param array $config
+     * @param ContainerBuilder $container
+     */
+    private function mapFormValidationGroupsParameters(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['validation_groups'])) {
+            foreach ($config['validation_groups'] as $name => $groups) {
+                $container->setParameter(sprintf('sylius.validation_groups.%s', $name), $groups);
+            }
+        }
     }
 }

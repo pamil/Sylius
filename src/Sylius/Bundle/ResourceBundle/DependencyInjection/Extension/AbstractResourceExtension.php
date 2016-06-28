@@ -18,56 +18,36 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 abstract class AbstractResourceExtension extends Extension
 {
     /**
-     * @param string $applicationName
-     * @param string $driver
-     * @param array $resources
      * @param ContainerBuilder $container
+     * @param string $applicationName
+     * @param string $driverName
+     * @param array $resources
      */
-    protected function registerResources($applicationName, $driver, array $resources, ContainerBuilder $container)
+    final protected function loadResources(ContainerBuilder $container, $applicationName, $driverName, array $resources)
     {
-        $container->setParameter(sprintf('%s.driver.%s', $this->getAlias(), $driver), true);
-        $container->setParameter(sprintf('%s.driver', $this->getAlias()), $driver);
+        $container->setParameter(sprintf('%s.driver.%s', $this->getAlias(), $driverName), true);
+        $container->setParameter(sprintf('%s.driver', $this->getAlias()), $driverName);
 
-        foreach ($resources as $resourceName => $resourceConfig) {
-            $alias = $applicationName.'.'.$resourceName;
-            $resourceConfig = array_merge(['driver' => $driver], $resourceConfig);
-
-            $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
-            $resources = array_merge($resources, [$alias => $resourceConfig]);
-            $container->setParameter('sylius.resources', $resources);
-
-            $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
+        foreach ($resources as $resourceName => $resourceConfiguration) {
+            $metadata = Metadata::fromAliasAndConfiguration(
+                sprintf('%s.%s', $applicationName, $resourceName),
+                array_merge(['driver' => $driverName], $resourceConfiguration)
+            );
 
             DriverProvider::get($metadata)->load($container, $metadata);
 
             if ($metadata->hasParameter('translation')) {
-                $alias = $alias.'_translation';
-                $resourceConfig = array_merge(['driver' => $driver], $resourceConfig['translation']);
-
-                $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
-                $resources = array_merge($resources, [$alias => $resourceConfig]);
-                $container->setParameter('sylius.resources', $resources);
-
-                $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
+                $metadata = Metadata::fromAliasAndConfiguration(
+                    sprintf('%s.%s_translation', $applicationName, $resourceName),
+                    array_merge(['driver' => $driverName], $resourceConfiguration['translation'])
+                );
 
                 DriverProvider::get($metadata)->load($container, $metadata);
-            }
-        }
-    }
-
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     */
-    protected function mapFormValidationGroupsParameters(array $config, ContainerBuilder $container)
-    {
-        if (isset($config['validation_groups'])) {
-            foreach ($config['validation_groups'] as $name => $groups) {
-                $container->setParameter(sprintf('sylius.validation_groups.%s', $name), $groups);
             }
         }
     }

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterResourcePass;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 use Sylius\Component\Resource\Metadata\Metadata;
@@ -31,6 +32,8 @@ abstract class AbstractDriver implements DriverInterface
      */
     public function load(ContainerBuilder $container, MetadataInterface $metadata)
     {
+        $container->addCompilerPass(new RegisterResourcePass($metadata));
+
         $this->setClassesParameters($container, $metadata);
 
         if ($metadata->hasClass('controller')) {

@@ -32,7 +32,7 @@ class SyliusShippingExtension extends AbstractResourceExtension
 
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
 
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->loadResources($container, 'sylius', $config['driver'], $config['resources']);
         $this->mapFormValidationGroupsParameters($config, $container);
 
         $configFiles = [
@@ -50,5 +50,18 @@ class SyliusShippingExtension extends AbstractResourceExtension
 
         $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method_rule');
         $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
+    }
+
+    /**
+     * @param array $config
+     * @param ContainerBuilder $container
+     */
+    private function mapFormValidationGroupsParameters(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['validation_groups'])) {
+            foreach ($config['validation_groups'] as $name => $groups) {
+                $container->setParameter(sprintf('sylius.validation_groups.%s', $name), $groups);
+            }
+        }
     }
 }

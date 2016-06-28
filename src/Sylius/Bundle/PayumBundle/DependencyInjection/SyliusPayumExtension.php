@@ -31,7 +31,7 @@ class SyliusPayumExtension extends AbstractResourceExtension
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->loadResources($container, 'sylius', $config['driver'], $config['resources']);
 
         $configFiles = [
             'services.xml',

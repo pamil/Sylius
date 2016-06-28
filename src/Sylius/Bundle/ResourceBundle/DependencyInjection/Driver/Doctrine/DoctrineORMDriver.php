@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\DoctrineTargetEntityResolverPass;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder\DefaultFormBuilder;
 use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
@@ -27,6 +28,16 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class DoctrineORMDriver extends AbstractDoctrineDriver
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function load(ContainerBuilder $container, MetadataInterface $metadata)
+    {
+        parent::load($container, $metadata);
+
+        $container->addCompilerPass(new DoctrineTargetEntityResolverPass($metadata));
+    }
+
     /**
      * {@inheritdoc}
      */

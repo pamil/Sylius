@@ -11,31 +11,39 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
- * Adds all resources to the registry.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class RegisterResourcesPass implements CompilerPassInterface
+final class RegisterResourcePass implements CompilerPassInterface
 {
+    /**
+     * @var MetadataInterface
+     */
+    private $resourceMetadata;
+
+    /**
+     * @param MetadataInterface $resourceMetadata
+     */
+    public function __construct(MetadataInterface $resourceMetadata)
+    {
+        $this->resourceMetadata = $resourceMetadata;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
         try {
-            $resources = $container->getParameter('sylius.resources');
-            $registry = $container->findDefinition('sylius.resource_registry');
+            $container->findDefinition('sylius.resource_registry')->addMethodCall('add', [$this->resourceMetadata]);
         } catch (InvalidArgumentException $exception) {
             return;
-        }
-
-        foreach ($resources as $alias => $configuration) {
-            $registry->addMethodCall('addFromAliasAndConfiguration', [$alias, $configuration]);
         }
     }
 }

@@ -34,7 +34,7 @@ class SyliusAddressingExtension extends AbstractResourceExtension
 
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
 
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->loadResources($container, 'sylius', $config['driver'], $config['resources']);
 
         $configFiles = [
             'services.xml',
