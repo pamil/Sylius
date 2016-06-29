@@ -36,7 +36,7 @@ class SyliusVariationExtension extends AbstractResourceExtension
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
+        $this->loadResources($container, 'sylius', $config['driver'], $this->resolveResources($config['resources'], $container));
 
         foreach ($config['resources'] as $variable => $parameters) {
             $this->createvariableServices($container, $variable);

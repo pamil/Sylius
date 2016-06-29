@@ -34,7 +34,7 @@ class SyliusUserExtension extends AbstractResourceExtension implements PrependEx
 
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
 
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->loadResources($container, 'sylius', $config['driver'], $config['resources']);
 
         $loader->load('services.xml');
 

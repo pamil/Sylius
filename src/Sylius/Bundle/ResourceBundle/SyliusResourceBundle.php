@@ -11,14 +11,9 @@
 
 namespace Sylius\Bundle\ResourceBundle;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\DoctrineTargetEntitiesResolverPass;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterResourcesPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Resource bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusResourceBundle extends Bundle
@@ -27,13 +22,4 @@ class SyliusResourceBundle extends Bundle
     const DRIVER_DOCTRINE_ORM = 'doctrine/orm';
     const DRIVER_DOCTRINE_MONGODB_ODM = 'doctrine/mongodb-odm';
     const DRIVER_DOCTRINE_PHPCR_ODM = 'doctrine/phpcr-odm';
-
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container)
-    {
-        $container->addCompilerPass(new RegisterResourcesPass());
-        $container->addCompilerPass(new DoctrineTargetEntitiesResolverPass());
-    }
 }

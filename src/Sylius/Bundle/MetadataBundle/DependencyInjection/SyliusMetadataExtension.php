@@ -31,7 +31,7 @@ class SyliusMetadataExtension extends AbstractResourceExtension implements Prepe
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->loadResources($container, 'sylius', $config['driver'], $config['resources']);
 
         $loader->load('services.xml');
         $loader->load('forms.xml');

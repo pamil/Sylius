@@ -40,7 +40,7 @@ class SyliusArchetypeExtension extends AbstractResourceExtension
             $config = $this->defineDefaultOrmRepository($config);
         }
 
-        $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
+        $this->loadResources($container, 'sylius', $config['driver'], $this->resolveResources($config['resources'], $container));
 
         foreach ($config['resources'] as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {

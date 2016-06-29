@@ -13,14 +13,12 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
 use Sylius\Component\Resource\Metadata\Metadata;
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -35,7 +33,7 @@ class SyliusResourceExtension extends Extension
     {
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        
+
         $configFiles = [
             'services.xml',
             'controller.xml',
@@ -69,10 +67,15 @@ class SyliusResourceExtension extends Extension
         $this->loadResources($config['resources'], $container);
     }
 
+    /**
+     * @param array $enabledDrivers
+     * @param array $resources
+     * @param LoaderInterface $loader
+     */
     private function loadPersistence(array $enabledDrivers, array $resources, LoaderInterface $loader)
     {
         foreach ($resources as $alias => $resource) {
-            if (!in_array($resource['driver'], $enabledDrivers)) {
+            if (!in_array($resource['driver'], $enabledDrivers, true)) {
                 throw new InvalidArgumentException(sprintf(
                     'Resource "%s" uses driver "%s", but this driver has not been enabled.',
                     $alias, $resource['driver']
@@ -85,26 +88,22 @@ class SyliusResourceExtension extends Extension
         }
     }
 
+    /**
+     * @param array $resources
+     * @param ContainerBuilder $container
+     */
     private function loadResources(array $resources, ContainerBuilder $container)
     {
-        foreach ($resources as $alias => $resourceConfig) {
-            $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
-
-            $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
-            $resources = array_merge($resources, [$alias => $resourceConfig]);
-            $container->setParameter('sylius.resources', $resources);
+        foreach ($resources as $resourceName => $resourceConfiguration) {
+            $metadata = Metadata::fromAliasAndConfiguration($resourceName, $resourceConfiguration);
 
             DriverProvider::get($metadata)->load($container, $metadata);
 
             if ($metadata->hasParameter('translation')) {
-                $alias = $alias.'_translation';
-                $resourceConfig = array_merge(['driver' => $resourceConfig['driver']], $resourceConfig['translation']);
-
-                $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
-                $resources = array_merge($resources, [$alias => $resourceConfig]);
-                $container->setParameter('sylius.resources', $resources);
-
-                $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
+                $metadata = Metadata::fromAliasAndConfiguration(
+                    sprintf('%s_translation', $resourceName),
+                    array_merge(['driver' => $resourceConfiguration['driver']], $resourceConfiguration['translation'])
+                );
 
                 DriverProvider::get($metadata)->load($container, $metadata);
             }
