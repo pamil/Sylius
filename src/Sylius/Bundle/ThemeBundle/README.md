@@ -1,10 +1,12 @@
-SyliusThemeBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusThemeBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusThemeBundle)
+SyliusBulwaBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusThemeBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusThemeBundle)
 ==================
 
-Theme management for [**Symfony2**](http://symfony.com).
+Bulwag management for [**Symfony2**](http://symfony.com).
 
 Sylius
 ------
+
+
 
 **Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
@@ -24,7 +26,7 @@ Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
+All information about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------
