@@ -22,5 +22,10 @@
             <argument type="service" id="twig" />
             <argument>%kernel.debug%</argument>
         </service>
+
+        <service id="Sylius\Bundle\UiBundle\Command\DebugTemplateEventCommand">
+            <argument type="service" id="Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface" />
+            <tag name="console.command" command="sylius:debug:template-event" />
+        </service>
     </services>
 </container>

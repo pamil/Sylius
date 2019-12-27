@@ -28,6 +28,16 @@ final class TemplateBlockRegistry implements TemplateBlockRegistryInterface
         return $this->eventsToTemplateBlocks;
     }
 
+    public function events(): array
+    {
+        return array_keys($this->eventsToTemplateBlocks);
+    }
+
+    public function findForEvent(string $eventName): array
+    {
+        return $this->eventsToTemplateBlocks[$eventName] ?? [];
+    }
+
     public function findEnabledForEvent(string $eventName): array
     {
         return array_values(array_filter(
