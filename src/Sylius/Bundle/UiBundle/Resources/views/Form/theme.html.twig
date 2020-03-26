@@ -245,3 +245,17 @@
         </div>
     {% endapply %}
 {% endblock %}
+
+{% block sylius_attribute_type_file_widget %}
+    {% apply spaceless %}
+        <div class="ui element">
+            {{ form_widget(form.file) }}
+        </div>
+        {% if form.vars.value.path|default(null) is not null %}
+            <div>{{ form.vars.value.path }}</div>
+        {% endif %}
+        <div class="ui element">
+            {{- form_errors(form.file) -}}
+        </div>
+    {% endapply %}
+{% endblock %}

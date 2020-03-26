@@ -53,6 +53,16 @@
                  configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DateAttributeConfigurationType" />
         </service>
 
+        <service id="sylius.attribute_type.file" class="Sylius\Component\Attribute\AttributeType\FileAttributeType">
+            <tag name="sylius.attribute.type" attribute-type="file" label="File"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\FileAttributeType" />
+        </service>
+
+        <service id="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\FileAttributeType">
+            <argument type="service" id="gaufrette.sylius_image_filesystem" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.attribute_type.select" class="Sylius\Component\Attribute\AttributeType\SelectAttributeType">
             <tag name="sylius.attribute.type" attribute-type="select" label="Select"
                  form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType"
