@@ -57,7 +57,8 @@ final class SalesDataProvider implements SalesDataProviderInterface
         return new SalesSummary(
             (new \DateTime('first day of next month last year')),
             (new \DateTime('last day of this month')),
-            $data
+            $data,
+            $channel
         );
     }
 }

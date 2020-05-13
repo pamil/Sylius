@@ -3,5 +3,5 @@
 {% block title %}{{ 'sylius.ui.dashboard'|trans }} {{ parent() }}{% endblock %}
 
 {% block content %}
-    {{ sylius_template_event('sylius.admin.dashboard.content', _context) }}
+    {{ sylius_template_event('sylius.admin.dashboard.content', { 'channel': channel }) }}
 {% endblock %}

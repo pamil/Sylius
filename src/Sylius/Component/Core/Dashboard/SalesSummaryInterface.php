@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
+use Sylius\Component\Core\Model\ChannelInterface;
+
 interface SalesSummaryInterface
 {
+    public function getChannel(): ChannelInterface;
+
     public function getMonths(): array;
 
     public function getSales(): array;

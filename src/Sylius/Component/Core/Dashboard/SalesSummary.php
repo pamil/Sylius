@@ -13,19 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
+use Sylius\Component\Core\Model\ChannelInterface;
+
 /**
  * @experimental
  */
 final class SalesSummary implements SalesSummaryInterface
 {
+    /** @var ChannelInterface */
+    private $channel;
+
     /** @psalm-var array<string, string> */
     private $monthsSalesMap = [];
 
     public function __construct(
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
-        array $salesData
+        array $salesData,
+        ChannelInterface $channel
     ) {
+        $this->channel = $channel;
+
         $period = new \DatePeriod($startDate, \DateInterval::createFromDateString('1 month'), $endDate);
 
         /** @var \DateTimeInterface $date */
@@ -43,6 +51,11 @@ final class SalesSummary implements SalesSummaryInterface
         foreach ($salesData as $month => $sales) {
             $this->monthsSalesMap[$month] = number_format(abs($sales / 100), 2, '.', '');
         }
+    }
+
+    public function getChannel(): ChannelInterface
+    {
+        return $this->channel;
     }
 
     public function getMonths(): array

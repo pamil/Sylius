@@ -36,6 +36,7 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
     public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics
     {
         return new DashboardStatistics(
+            $channel,
             $this->orderRepository->getTotalPaidSalesForChannel($channel),
             $this->orderRepository->countPaidByChannel($channel),
             $this->customerRepository->countCustomers()

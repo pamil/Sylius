@@ -40,11 +40,19 @@
         </service>
 
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController" public="true">
-            <argument type="service" id="sylius.dashboard.statistics_provider" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="templating" />
             <argument type="service" id="router" />
+        </service>
+
+        <service id="sylius.controller.admin.dashboard.chart" class="Sylius\Bundle\AdminBundle\Controller\Dashboard\ChartController">
+            <argument type="service" id="templating" />
             <argument type="service" id="Sylius\Component\Core\Dashboard\SalesDataProviderInterface" />
+        </service>
+
+        <service id="sylius.controller.admin.dashboard.statistics" class="Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController">
+            <argument type="service" id="templating" />
+            <argument type="service" id="Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface" />
         </service>
 
         <service id="sylius.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController" public="true">
