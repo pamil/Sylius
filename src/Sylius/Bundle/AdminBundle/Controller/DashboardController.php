@@ -58,11 +58,10 @@ final class DashboardController
 
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
     {
-        $channel = null;
         if (null !== $channelCode) {
-            $channel = $this->channelRepository->findOneByCode($channelCode);
+            return $this->channelRepository->findOneByCode($channelCode);
         }
 
-        return $channel ?? $this->channelRepository->findOneBy([]);
+        return $this->channelRepository->findOneBy([]);
     }
 }
