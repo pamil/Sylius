@@ -129,9 +129,14 @@ jobs:
                 with:
                     php-version: "${{ matrix.php }}"
                     ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
-                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
-                    tools: symfony
+                    extensions: intl, gd, opcache, mysql, pdo_mysql, blackfire, :xdebug
+                    tools: symfony, blackfire, blackfire-player
                     coverage: none
+                env:
+                    BLACKFIRE_SERVER_ID: ${{ secrets.BLACKFIRE_SERVER_ID }}
+                    BLACKFIRE_SERVER_TOKEN: ${{ secrets.BLACKFIRE_SERVER_TOKEN }}
+                    BLACKFIRE_CLIENT_ID: ${{ secrets.BLACKFIRE_CLIENT_ID }}
+                    BLACKFIRE_CLIENT_TOKEN: ${{ secrets.BLACKFIRE_CLIENT_TOKEN }}
 
             -   
                 name: Restrict Symfony version
@@ -198,11 +203,11 @@ jobs:
                     
             -
                 name: Run PHPUnit
-                run: vendor/bin/phpunit --colors=always
+                run: blackfire run vendor/bin/phpunit --colors=always
                     
             -
                 name: Run non-JS Behat
-                run: vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" --rerun
+                run: blackfire run vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli" --rerun
                
             -     
                 name: Run CLI Behat
