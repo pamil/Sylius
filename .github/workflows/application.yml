@@ -124,6 +124,7 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
 
         steps:
+            -   run: exit 1
             -   
                 uses: actions/checkout@v2
 
@@ -251,6 +252,7 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
 
         steps:
+            -   run: exit 1
             -   
                 uses: actions/checkout@v2
 
