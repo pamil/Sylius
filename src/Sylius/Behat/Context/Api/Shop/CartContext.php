@@ -37,8 +37,10 @@ final class CartContext implements Context
     /** @var ApiClientInterface */
     private $ordersAdminClient;
 
-    /** @var ApiClientInterface */
-    private $productsClient;
+    /**
+     * @var \Sylius\Behat\ApiChecker\ApiClientInterface
+     */
+    private $apiClient;
 
     /** @var ApiClientInterface */
     private $productVariantsClient;
@@ -55,7 +57,7 @@ final class CartContext implements Context
     public function __construct(
         ApiClientInterface $cartsClient,
         ApiClientInterface $ordersAdminClient,
-        ApiClientInterface $productsClient,
+        \Sylius\Behat\ApiChecker\ApiClientInterface $apiClient,
         ApiClientInterface $productVariantsClient,
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
@@ -63,7 +65,7 @@ final class CartContext implements Context
     ) {
         $this->cartsClient = $cartsClient;
         $this->ordersAdminClient = $ordersAdminClient;
-        $this->productsClient = $productsClient;
+        $this->apiClient = $apiClient;
         $this->productVariantsClient = $productVariantsClient;
         $this->responseChecker = $responseChecker;
         $this->sharedStorage = $sharedStorage;
@@ -141,26 +143,22 @@ final class CartContext implements Context
         string $productOption,
         string $productOptionValue
     ): void {
-        $productData = json_decode($this->productsClient->show($product->getCode())->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $productData = $this->apiClient->get('/api/v2/shop/products/' . $product->getCode());
 
         $variantCode = null;
-        foreach ($productData['options'] as $optionIri) {
-            $optionData = json_decode($this->productsClient->showByIri($optionIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
-
+        foreach ($productData['options'] as $optionData) {
             if ($optionData['name'] !== $productOption) {
                 continue;
             }
 
-            foreach ($optionData['values'] as $valueIri) {
-                $optionValueData = json_decode($this->productsClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
-
+            foreach ($optionData['values'] as $optionValueData) {
                 if ($optionValueData['value'] !== $productOptionValue) {
                     continue;
                 }
 
                 $this->productVariantsClient->index();
                 $this->productVariantsClient->addFilter('product', $productData['@id']);
-                $this->productVariantsClient->addFilter('optionValues', $valueIri);
+                $this->productVariantsClient->addFilter('optionValues', $optionValueData['@id']);
 
                 $variantsData = json_decode($this->productVariantsClient->filter()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
