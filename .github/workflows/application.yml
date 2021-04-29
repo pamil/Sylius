@@ -112,7 +112,7 @@ jobs:
     test-application-without-frontend:
         runs-on: ubuntu-18.04
 
-        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
 
         timeout-minutes: 25
 
@@ -122,26 +122,44 @@ jobs:
                 php: ["7.4", "8.0"]
                 symfony: ["^4.4", "^5.2"]
                 node: ["10.x"]
-                mysql: ["5.7", "8.0"]
+#                mysql: ["5.7", "8.0"]
+
+        services:
+            # Label used to access the service container
+            postgres:
+                # Docker Hub image
+                image: postgres
+                # Provide the password for postgres
+                env:
+                    POSTGRES_PASSWORD: postgres
+                # Set health checks to wait until postgres has started
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
+                ports:
+                    # Maps tcp port 5432 on service container to the host
+                    - 5432:5432
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/postgres?serverVersion=13.2"
 
         steps:
             -
                 uses: actions/checkout@v2
 
-            -
-                name: Shutdown default MySQL
-                run: sudo service mysql stop
-
-            -
-                name: Setup MySQL
-                uses: mirromutth/mysql-action@v1.1
-                with:
-                    mysql version: "${{ matrix.mysql }}"
-                    mysql root password: "root"
+#            -
+#                name: Shutdown default MySQL
+#                run: sudo service mysql stop
+#
+#            -
+#                name: Setup MySQL
+#                uses: mirromutth/mysql-action@v1.1
+#                with:
+#                    mysql version: "${{ matrix.mysql }}"
+#                    mysql root password: "root"
 
             -
                 name: Setup PHP
@@ -149,7 +167,7 @@ jobs:
                 with:
                     php-version: "${{ matrix.php }}"
                     ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
-                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
+                    extensions: intl, gd, opcache, pgsql, pdo_pgsql, mysql, pdo_mysql, :xdebug
                     tools: symfony
                     coverage: none
 
@@ -195,19 +213,18 @@ jobs:
             -
                 name: Prepare application database
                 run: |
-                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
-                    bin/console doctrine:migrations:migrate -n -vvv
+                    bin/console doctrine:schema:create -vvv
 
-            -
-                name: Test provided migrations
-                run: |
-                    bin/console doctrine:migrations:migrate first --no-interaction
-                    bin/console doctrine:migrations:migrate latest --no-interaction
-                    bin/console doctrine:schema:validate --skip-mapping -vvv
-
-            -
-                name: Test installer
-                run: bin/console sylius:install --no-interaction -vvv
+#            -
+#                name: Test provided migrations
+#                run: |
+#                    bin/console doctrine:migrations:migrate first --no-interaction
+#                    bin/console doctrine:migrations:migrate latest --no-interaction
+#                    bin/console doctrine:schema:validate --skip-mapping -vvv
+#
+#            -
+#                name: Test installer
+#                run: bin/console sylius:install --no-interaction -vvv
 
             -
                 name: Load fixtures
@@ -241,7 +258,7 @@ jobs:
     test-application-with-frontend:
         runs-on: ubuntu-18.04
 
-        name: "Test JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+        name: "Test JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
 
         timeout-minutes: 25
 
@@ -251,26 +268,44 @@ jobs:
                 php: ["7.4", "8.0"]
                 symfony: ["^4.4", "^5.2"]
                 node: ["10.x"]
-                mysql: ["5.7", "8.0"]
+#                mysql: ["5.7", "8.0"]
+
+        services:
+            # Label used to access the service container
+            postgres:
+                # Docker Hub image
+                image: postgres
+                # Provide the password for postgres
+                env:
+                    POSTGRES_PASSWORD: postgres
+                # Set health checks to wait until postgres has started
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
+                ports:
+                    # Maps tcp port 5432 on service container to the host
+                    - 5432:5432
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/postgres?serverVersion=13.2"
 
         steps:
             -
                 uses: actions/checkout@v2
 
-            -
-                name: Shutdown default MySQL
-                run: sudo service mysql stop
-
-            -
-                name: Setup MySQL
-                uses: mirromutth/mysql-action@v1.1
-                with:
-                    mysql version: "${{ matrix.mysql }}"
-                    mysql root password: "root"
+#            -
+#                name: Shutdown default MySQL
+#                run: sudo service mysql stop
+#
+#            -
+#                name: Setup MySQL
+#                uses: mirromutth/mysql-action@v1.1
+#                with:
+#                    mysql version: "${{ matrix.mysql }}"
+#                    mysql root password: "root"
 
             -
                 name: Setup PHP
@@ -278,7 +313,7 @@ jobs:
                 with:
                     php-version: "${{ matrix.php }}"
                     ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
-                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
+                    extensions: intl, gd, opcache, pgsql, pdo_pgsql, mysql, pdo_mysql, :xdebug
                     tools: symfony
                     coverage: none
 
@@ -360,8 +395,7 @@ jobs:
             -
                 name: Prepare application database
                 run: |
-                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
-                    bin/console doctrine:migrations:migrate -n -vvv
+                    bin/console doctrine:schema:create -vvv
 
             -
                 name: Build assets
