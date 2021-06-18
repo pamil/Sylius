@@ -156,7 +156,7 @@ jobs:
                 with:
                     php-version: "${{ matrix.php }}"
                     ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
-                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug
+                    extensions: intl, gd, opcache, mysql, pdo_mysql, :xdebug, dbg
                     tools: symfony
                     coverage: none
 
@@ -193,7 +193,10 @@ jobs:
 
             -
                 name: Warmup cache
-                run: bin/console cache:warmup
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install gdb
+                    gdb php -ex "run bin/console cache:warmup" -ex "bt" -ex "bt"
 
             -
                 name: Make filesystem readonly
@@ -202,7 +205,7 @@ jobs:
             -
                 name: Prepare application database
                 run: |
-                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
+                    APP_DEBUG=1 gdb php -ex "run bin/console doctrine:database:create -vvv" -ex "bt" -ex "bt"
                     bin/console doctrine:migrations:migrate -n -vvv
 
             -
